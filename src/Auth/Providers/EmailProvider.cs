@@ -11,6 +11,7 @@ namespace Firebase.Auth.Providers
         private GetAccountInfo getAccountInfo;
         private VerifyPassword verifyPassword;
         private ResetPassword resetPassword;
+        private SendEmailVerification sendEmailVerification;
         private SetAccountLink linkAccount;
 
         public override FirebaseProviderType ProviderType => FirebaseProviderType.EmailAndPassword;
@@ -24,6 +25,7 @@ namespace Firebase.Auth.Providers
             this.getAccountInfo = new GetAccountInfo(this.config);
             this.verifyPassword = new VerifyPassword(this.config);
             this.resetPassword = new ResetPassword(this.config);
+            this.sendEmailVerification = new SendEmailVerification(this.config);
             this.linkAccount = new SetAccountLink(config);
         }
 
@@ -45,6 +47,16 @@ namespace Firebase.Auth.Providers
             };
 
             return this.resetPassword.ExecuteAsync(request);
+        }
+
+        public Task SendEmailVerificationAsync(string email)
+        {
+            var request = new SendEmailVerificationRequest
+            {
+                Email = email
+            };
+
+            return this.sendEmailVerification.ExecuteAsync(request);
         }
 
         public Task<UserCredential> SignInUserAsync(string email, string password)

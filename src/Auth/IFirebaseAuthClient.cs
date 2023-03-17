@@ -60,6 +60,11 @@ namespace Firebase.Auth
         Task ResetEmailPasswordAsync(string email);
 
         /// <summary>
+        /// Sends a password reset email to given address.
+        /// </summary>
+        Task SendEmailVerificationAsync(string email);
+
+        /// <summary>
         /// Signs current user out.
         /// </summary>
         void SignOut();

@@ -191,6 +191,14 @@ namespace Firebase.Auth
             await provider.ResetEmailPasswordAsync(email).ConfigureAwait(false);
         }
 
+        public async Task SendEmailVerificationAsync(string email)
+        {
+            await this.CheckAuthDomain().ConfigureAwait(false);
+
+            var provider = (EmailProvider)this.config.GetAuthProvider(FirebaseProviderType.EmailAndPassword);
+            await provider.ResetEmailPasswordAsync(email).ConfigureAwait(false);
+        }
+
         public void SignOut()
         {
             var uid = this.User?.Uid;
